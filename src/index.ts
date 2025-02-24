@@ -10,8 +10,6 @@ connectToDB()
 const insertData = async () => {
 
     try {
-
-
         await User.deleteMany()
         const res = await User.insertMany([
             { sid: "U001", sName: "John Doe", sEmail: "johndoe@example.com", sAge: 25 },
@@ -47,25 +45,39 @@ const insertData = async () => {
 
 
 
-const fetchData = async () => {
-    try {
-        const userWithNameAndAge = await User.find({ $and: [{ sName: 'John Doe' }, { sAge: { $gt: 20 } }] }).explain('executionStats')
+// const fetchData = async () => {
+//     try {
+//         const userWithNameAndAge = await User.find({ $and: [{ sName: 'John Doe' }, { sAge: { $gt: 20 } }] }).explain('executionStats')
      
-        console.log(userWithNameAndAge)
-    } catch (error) {
-        console.log(error)
+//         console.log(userWithNameAndAge)
+//     } catch (error) {
+//         console.log(error)
 
-    }
+//     }
 
-    let indexes = await User.collection.indexes()
-    console.log(indexes)
+//     let indexes = await User.collection.indexes()
+//     console.log(indexes)
+
 
     
-    
-}
+// }
+// const aggregatePractice=async()=>{
+//     const eg1=await User.aggregate([
+//         {$match:{sAge:{$gte:30}}},
+//         {$sort:{sAge:1,sName:1}},
+//         // {$project:{sName:1,sAge:1}},
+//         // {$count:'sName'}
+
+//     ])
+
+//     console.log(eg1)
+// }
+// aggregatePractice()
 
 
-fetchData()
+// fetchData()
+
+
 
 
 

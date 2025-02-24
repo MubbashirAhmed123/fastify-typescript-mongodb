@@ -1,26 +1,32 @@
 import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import { FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { userRegisterationSchema } from "../../services/user.verificationSchema";
-import { UserLoginSchema, UserResSchema } from "../../domain/userservice/user.type";
+import { UserLoginSchema, UserResponseSchema,StudentAction, UserRequestSchema } from "../../domain/userservice/user.type";
+import { userUsecase } from "../../services/user-usecase";
 
 const userIntegration: FastifyPluginAsync = async (fastify) => {
+    
     fastify.post(
-        "/",
+        "/register",
         { schema: userRegisterationSchema },
-        async (req, rep) => {
-            rep.send({data:{msg:'users',status:201}});
+        async (req, res) => {
+            console.log(req.body)
+            let action:'register'='register'
+            await userUsecase(req.body as UserRequestSchema,res,action)
         }
     ).post('/login',{
         schema:{
             body: UserLoginSchema, 
             response: {
-                200: UserResSchema
+                200: UserResponseSchema
             }
         }
-    },(req:FastifyRequest,rep:FastifyReply)=>{
-        rep.send({data:{msg:'Login successful',status:200}})
+    },async(req,res)=>{
+        let action:'login'='login'
+        await userUsecase(req.body as UserLoginSchema,res,action)
     })
     
+
 };
 
 export default userIntegration

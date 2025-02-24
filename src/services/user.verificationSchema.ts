@@ -1,8 +1,8 @@
-import { UserReqSchema, UserResSchema } from "../domain/userservice/user.type";
+import { UserRequestSchema, UserResponseSchema } from "../domain/userservice/user.type";
 
 export const userRegisterationSchema = {
-    body: UserReqSchema,  
+    body: UserRequestSchema,  
     response: {
-        200: UserResSchema, 
+        200: UserResponseSchema, 
     },
 };

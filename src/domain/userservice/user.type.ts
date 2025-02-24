@@ -1,13 +1,13 @@
 import { Type, Static } from "@sinclair/typebox";
 
-const UserReqSchema = Type.Object({
-    name: Type.String(),
-    email: Type.String(),
-    phoneNumber: Type.Number(),
-    password:Type.String()
+const UserRequestSchema=Type.Object({
+    sName: Type.String(),
+    sEmail: Type.String(),
+    sAge: Type.Number(),
+    sPassword:Type.String()
 });
 
-const UserResSchema = Type.Object({
+const UserResponseSchema=Type.Object({
     data: Type.Object({
         msg: Type.String(),
         status: Type.Number(),
@@ -16,12 +16,15 @@ const UserResSchema = Type.Object({
 
 
 const UserLoginSchema=Type.Object({
-    email:Type.String(),
-    password:Type.String()
+    sEmail:Type.String(),
+    sPassword:Type.String()
 })
 
-type UserReqType = Static<typeof UserReqSchema>;
-type UserResType = Static<typeof UserResSchema>;
+type UserRequestSchema = Static<typeof UserRequestSchema>;
+type UserResponseSchema = Static<typeof UserResponseSchema>;
 type UserLoginSchema=Static<typeof UserLoginSchema>
 
-export { UserReqSchema, UserResSchema, UserReqType, UserResType ,UserLoginSchema};
+type StudentAction ='register' | 'login' | 'profile'
+
+
+export { UserRequestSchema, UserResponseSchema,UserLoginSchema,StudentAction};
